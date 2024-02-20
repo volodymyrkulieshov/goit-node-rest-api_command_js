@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const createContactSchema = Joi.object({
+export const createContactSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string()
     .email({
@@ -8,17 +8,17 @@ const createContactSchema = Joi.object({
       tlds: { allow: ["com","ua", "net" ] },
     })
     .required(),
-  phone: Joi.number().required(),
+  phone: Joi.string().required(),
 });
 
-const updateContactSchema = Joi.object({
-  name: Joi.string().required(),
+export const updateContactSchema = Joi.object({
+  name: Joi.string(),
   email: Joi.string().email({
     minDomainSegments: 2,
     tlds: { allow: ["com","ua", "net" ] },
-  }).required(),
+  }),
 
-  phone: Joi.number().required(),
+  phone: Joi.string(),
 });
 
 module.exports = { createContactSchema, updateContactSchema };
